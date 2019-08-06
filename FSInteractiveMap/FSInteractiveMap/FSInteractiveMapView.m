@@ -195,7 +195,7 @@
                 CAShapeLayer* l = (CAShapeLayer*)self.layer.sublayers[i];
                 
                 if(_clickHandler) {
-                    _clickHandler(element.identifier, l);
+                    _clickHandler(element.identifier, element.title, l);
                 }
             }
         }

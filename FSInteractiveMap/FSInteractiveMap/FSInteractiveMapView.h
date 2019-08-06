@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UIColor* strokeColor;
 
 // Click handler
-@property (nonatomic, copy) void (^clickHandler)(NSString* identifier, CAShapeLayer* layer);
+@property (nonatomic, copy) void (^clickHandler)(NSString* identifier, NSString* description, CAShapeLayer* layer);
 
 // Loading functions
 - (void)loadMap:(NSString*)mapName withColors:(NSDictionary*)colorsDict;
