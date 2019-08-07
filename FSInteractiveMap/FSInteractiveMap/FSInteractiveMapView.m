@@ -183,9 +183,7 @@
 - (void) cleanUp
 {
     [_scaledPaths removeAllObjects];
-    for (CALayer *layer in self.layer.sublayers) {
-        [layer removeFromSuperlayer];
-    }
+    self.layer.sublayers = nil;
     _svg = nil;
 }
 
