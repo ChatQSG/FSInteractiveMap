@@ -28,4 +28,7 @@
 // Layers enumeration
 - (void)enumerateLayersUsingBlock:(void(^)(NSString* identifier, CAShapeLayer* layer))block;
 
+// Clean up current drawing
+- (void)cleanUp;
+
 @end

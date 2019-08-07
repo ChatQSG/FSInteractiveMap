@@ -178,6 +178,17 @@
     }
 }
 
+#pragma mark - Cleanup
+
+- (void) cleanUp
+{
+    [_scaledPaths removeAllObjects];
+    for (CALayer *layer in self.layer.sublayers) {
+        [layer removeFromSuperlayer];
+    }
+    _svg = nil;
+}
+
 #pragma mark - Touch handling
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
