@@ -85,6 +85,11 @@
     [self loadMap:mapName withColors:[self getColorsForData:data colorAxis:colors]];
 }
 
+- (void)loadMap:(NSString*)mapName withData:(NSDictionary*)data colorLevels:(NSArray*)colors
+{
+    [self loadMap:mapName withColors:[self getColorsForData:data colorLevels:colors]];
+}
+
 - (NSDictionary*)getColorsForData:(NSDictionary*)data colorAxis:(NSArray*)colors
 {
     NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[data count]];
@@ -132,6 +137,31 @@
         [dict setObject:color forKey:key];
     }
     
+    return dict;
+}
+
+- (NSDictionary*)getColorsForData:(NSDictionary*)data colorLevels:(NSArray*)colors
+{
+    NSUInteger totalColorsCount = [colors count];
+    NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[data count]];
+    NSNumber* maxValue = [[data allValues] valueForKeyPath:@"@max.intValue"];
+    float period = 0;
+    if (totalColorsCount > 0) { period = [maxValue floatValue] / totalColorsCount; }
+    for (id key in data) {
+        float currentValue = [[data objectForKey:key] floatValue];
+        UIColor *color = _fillColor;
+        if (totalColorsCount == 0 || currentValue == 0) {
+            [dict setObject:color forKey:key];
+        } else {
+            int colorIndex = 1;
+            while (currentValue < colorIndex * period) { colorIndex += 1; }
+            if (colorIndex > 0 && colorIndex <= totalColorsCount) {
+                [dict setObject:colors[colorIndex - 1] forKey:key];
+            } else {
+                [dict setObject:color forKey:key];
+            }
+        }
+    }
     return dict;
 }
 
