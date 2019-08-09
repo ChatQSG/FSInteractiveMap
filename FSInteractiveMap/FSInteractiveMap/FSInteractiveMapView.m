@@ -154,7 +154,7 @@
             [dict setObject:color forKey:key];
         } else {
             int colorIndex = 1;
-            while (currentValue < colorIndex * period) { colorIndex += 1; }
+            while (currentValue > colorIndex * period) { colorIndex += 1; }
             if (colorIndex > 0 && colorIndex <= totalColorsCount) {
                 [dict setObject:colors[colorIndex - 1] forKey:key];
             } else {
